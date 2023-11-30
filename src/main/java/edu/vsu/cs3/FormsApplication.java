@@ -1,11 +1,11 @@
-package edu.vsu.forms;
+package edu.vsu.cs3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "edu.vsu.forms")
+@ComponentScan(basePackages = "edu.vsu.cs3")
 public class FormsApplication {
 
 	public static void main(String[] args) {

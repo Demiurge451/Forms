@@ -1,4 +1,4 @@
-package edu.vsu.forms.config;
+package edu.vsu.cs3.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

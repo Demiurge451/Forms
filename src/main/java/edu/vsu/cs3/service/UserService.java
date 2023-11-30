@@ -1,7 +1,7 @@
-package edu.vsu.forms.service;
+package edu.vsu.cs3.service;
 
-import edu.vsu.forms.model.User;
-import edu.vsu.forms.repository.UserRepository;
+import edu.vsu.cs3.model.User;
+import edu.vsu.cs3.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;

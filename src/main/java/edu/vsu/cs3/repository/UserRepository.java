@@ -1,6 +1,6 @@
-package edu.vsu.forms.repository;
+package edu.vsu.cs3.repository;
 
-import edu.vsu.forms.model.User;
+import edu.vsu.cs3.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
