@@ -1,8 +1,9 @@
-package edu.vsu.forms.controller;
+package edu.vsu.cs3.controller;
 
-import edu.vsu.forms.dto.response.UserResponse;
-import edu.vsu.forms.model.User;
-import edu.vsu.forms.service.UserService;
+import edu.vsu.cs3.dto.request.UserRequest;
+import edu.vsu.cs3.dto.response.UserResponse;
+import edu.vsu.cs3.model.User;
+import edu.vsu.cs3.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("api/users")
 public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
@@ -23,26 +25,26 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/")
     public ResponseEntity<List<UserResponse>> getUsers() {
         return new ResponseEntity<>(userService.getListOfUsers().stream()
                 .map(user -> modelMapper.map(user, UserResponse.class))
                 .toList(), HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable int id) {
         return new ResponseEntity<>(modelMapper
                 .map(userService.findById(id), UserResponse.class), HttpStatus.OK);
     }
 
-    @PostMapping("/users")
-    public HttpStatus createUser(@RequestBody User user) {
-        userService.save(user);
+    @PostMapping("/")
+    public HttpStatus createUser(@RequestBody UserRequest userRequest) {
+        userService.save(modelMapper.map(userRequest, User.class));
         return HttpStatus.OK;
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public HttpStatus deleteUser(@PathVariable int id) {
         userService.delete(id);
         return HttpStatus.OK;

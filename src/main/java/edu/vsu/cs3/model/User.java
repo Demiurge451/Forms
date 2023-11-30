@@ -1,15 +1,15 @@
-package edu.vsu.forms.model;
+package edu.vsu.cs3.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name="account")
+@Table(name = "accounts")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     private String login;
     private String password;
     private String number;

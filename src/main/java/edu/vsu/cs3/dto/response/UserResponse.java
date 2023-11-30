@@ -1,12 +1,12 @@
-package edu.vsu.forms.dto.request;
+package edu.vsu.cs3.dto.response;
 
 import lombok.Data;
 
 @Data
-public class UserRequest {
-    private long id;
+public class UserResponse {
+    private int id;
     private String login;
     private String password;
-    private String number;
+    private long number;
     private String email;
 }
