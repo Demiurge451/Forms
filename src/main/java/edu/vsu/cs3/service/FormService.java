@@ -2,6 +2,7 @@ package edu.vsu.cs3.service;
 
 
 import edu.vsu.cs3.model.Form;
+import edu.vsu.cs3.model.Question;
 import edu.vsu.cs3.repository.FormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,13 @@ public class FormService {
     @Transactional
     public void delete(int id) {
         formRepository.delete(findById(id));
+    }
+
+    @Transactional
+    public Form update(int id, Form updatedForm) {
+        Form form = formRepository.getReferenceById(id);
+        form.setForeword(updatedForm.getForeword());
+        form.setUser(updatedForm.getUser());
+        return formRepository.save(form);
     }
 }

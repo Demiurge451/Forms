@@ -1,11 +1,10 @@
 package edu.vsu.cs3.controller;
 
-import edu.vsu.cs3.dto.request.FormRequest;
 import edu.vsu.cs3.dto.request.QuestionRequest;
-import edu.vsu.cs3.dto.response.FormResponse;
 import edu.vsu.cs3.dto.response.QuestionResponse;
-import edu.vsu.cs3.model.Form;
+import edu.vsu.cs3.dto.response.ResultResponse;
 import edu.vsu.cs3.model.Question;
+import edu.vsu.cs3.model.Result;
 import edu.vsu.cs3.service.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class QuestionController {
     @GetMapping("/")
     public ResponseEntity<List<QuestionResponse>> getQuestions() {
         return new ResponseEntity<>(questionService.getListOfQuestions().stream()
-                .map(q -> modelMapper.map(q, QuestionResponse.class)).toList(), HttpStatus.OK);
+                .map(question -> modelMapper.map(question, QuestionResponse.class)).toList(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -49,5 +48,11 @@ public class QuestionController {
     public HttpStatus deleteQuestion(@PathVariable int id) {
         questionService.delete(id);
         return HttpStatus.OK;
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<QuestionResponse> updateQuestion(@PathVariable int id, @RequestBody QuestionRequest questionRequest) {
+        Question question = questionService.update(id, modelMapper.map(questionRequest, Question.class));
+        return new ResponseEntity<>(modelMapper.map(question, QuestionResponse.class), HttpStatus.OK);
     }
 }

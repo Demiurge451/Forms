@@ -18,7 +18,10 @@ public class Form {
     private int id;
     private String foreword;
 
-    @ToString.Exclude
     @OneToMany(mappedBy="form", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

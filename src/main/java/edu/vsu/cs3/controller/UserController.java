@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/users")
@@ -48,5 +49,11 @@ public class UserController {
     public HttpStatus deleteUser(@PathVariable int id) {
         userService.delete(id);
         return HttpStatus.OK;
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponse> updateUser(@PathVariable int id, @RequestBody UserRequest userRequest) {
+        User user = userService.update(id, modelMapper.map(userRequest, User.class));
+        return new ResponseEntity<>(modelMapper.map(user, UserResponse.class), HttpStatus.OK);
     }
 }

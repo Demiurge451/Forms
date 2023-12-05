@@ -9,4 +9,5 @@ import java.util.List;
 @Data
 public class FormRequest {
     private String foreword;
+    private Integer user_id;
 }

@@ -8,7 +8,8 @@ import java.util.List;
 
 @Data
 public class FormResponse {
-    private int id;
+    private Integer id;
     private String foreword;
-    private List<QuestionResponse> questions = new ArrayList<>();
+    private List<QuestionResponse> questions;
+    private Integer user_id;
 }

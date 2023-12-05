@@ -1,8 +1,11 @@
 package edu.vsu.cs3.controller;
 
 import edu.vsu.cs3.dto.request.FormRequest;
+import edu.vsu.cs3.dto.request.QuestionRequest;
 import edu.vsu.cs3.dto.response.FormResponse;
+import edu.vsu.cs3.dto.response.QuestionResponse;
 import edu.vsu.cs3.model.Form;
+import edu.vsu.cs3.model.Question;
 import edu.vsu.cs3.service.FormService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +51,11 @@ public class FormController {
     public HttpStatus deleteForm(@PathVariable int id) {
         formService.delete(id);
         return HttpStatus.OK;
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FormResponse> updateForm(@PathVariable int id, @RequestBody FormRequest formRequest) {
+        Form form = formService.update(id, modelMapper.map(formRequest, Form.class));
+        return new ResponseEntity<>(modelMapper.map(form, FormResponse.class), HttpStatus.OK);
     }
 }
