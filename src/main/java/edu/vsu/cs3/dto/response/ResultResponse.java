@@ -1,12 +1,12 @@
 package edu.vsu.cs3.dto.response;
 
+import edu.vsu.cs3.model.Question;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class AnswerResponse {
+public class ResultResponse {
     private Integer id;
-    private String txt;
-    private Integer question_id;
+    private Integer answer_id;
 }

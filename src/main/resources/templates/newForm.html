@@ -1,0 +1,44 @@
+<!-- newForm.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Forms</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+    <script th:inline="javascript" type="text/javascript" th:src="@{/formScript.js}"></script>
+</head>
+</head>
+<body>
+<h2>Create form</h2>
+
+<!-- Form to Create Questionnaire -->
+<form th:action="@{api/formView/new}" th:object="${form}" method="post">
+    <input type="hidden" id="id" th:field="*{id}" />
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" th:field="*{title}" required/>
+    </div>
+
+    <div>
+        <label for="foreword">Foreword:</label>
+        <textarea id="foreword" name="foreword" th:field="*{foreword}" required></textarea>
+    </div>
+
+    <div>
+        <label for="questions">Questions:</label>
+        <ul th:if="${form.questions != null}" th:each="question : ${form.questions}">
+            <li>
+                <span th:text="${question.txt}"></span>
+                <ul th:if="${question.answers != null}" th:each="answer : ${question.answers}">
+                    <li th:text="${answer.text}"></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <button type="button" onclick="submitForm()">Submit</button>
+        <button type="button" onclick="redirectToQuestionPage()">Create question</button>
+    </div>
+</form>
+</body>
+</html>

@@ -16,9 +16,13 @@ public class Form {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String title;
     private String foreword;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy="form", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="form", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

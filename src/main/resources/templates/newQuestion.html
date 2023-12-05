@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+    <script th:inline="javascript" type="text/javascript" th:src="@{/questionScript.js}"></script>
+</head>
+<body onload="setQueryParam()">
+<h2>Create question</h2>
+<form th:action="@{/api/questionView/new}" th:object="${question}" method="post">
+    <input type="text" id="id" th:field="*{id}" />
+    <input type="hidden" id="form_id"/>
+    <div>
+        <label for="txt">Question:</label>
+        <input type="text" id="txt" name="txt" th:field="*{txt}" required/>
+    </div>
+
+    <div>
+        <label for="multiplySelection">Multiply Selection:</label>
+        <input type="checkbox" id="multiplySelection" name="multiplySelection" th:field="*{multiplySelection}"/>
+    </div>
+    <div>
+        <label for="answers">Answers:</label>
+        <ol th:if="${question.answers != null}" th:each="answer : ${question.answers}">
+            <li>
+                <span th:text="${answer.txt}"></span>
+            </li>
+        </ol>
+    </div>
+
+    <div>
+        <input type="text" id="answerTxt" placeholder="Enter your answer">
+        <button type='button' onclick="addAnswer()">Add Answer</button>
+        <button type="button" onclick="submitQuestion()">Submit</button>
+    </div>
+</form>
+</body>
+</html>
