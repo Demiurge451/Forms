@@ -30,7 +30,7 @@ public class QuestionController {
     @GetMapping("/")
     public ResponseEntity<List<QuestionResponse>> getQuestions() {
         return new ResponseEntity<>(questionService.getListOfQuestions().stream()
-                .map(q -> modelMapper.map(q, QuestionResponse.class)).toList(), HttpStatus.OK);
+                .map(question -> modelMapper.map(question, QuestionResponse.class)).toList(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
